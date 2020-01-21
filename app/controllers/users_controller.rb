@@ -1,8 +1,10 @@
 class UsersController < ApplicationController
+
   def index
-    user=current_user
+    @user=current_user
     @users=User.all
     @book=Book.new
+    
   end
   def show
     user=current_user
@@ -14,17 +16,18 @@ class UsersController < ApplicationController
     if @user.id==current_user.id
       render :edit
     else
-      redirect_to users_path
+      redirect_to user_path(current_user)
     end
   end
   def update
     @user = User.find(params[:id])
     if@user.update(user_params)
       flash[:notice]="successfully 更新できました"
-      redirect_to user_path(@user.id)  
+      redirect_to user_path(current_user)
     else
       flash.now[:alert] = 'error 更新失敗です'
-      render :edit
+      @book=Book.new
+      render :show
     end
   end
   private 
