@@ -78,3 +78,9 @@ group :test do
   gem "factory_bot_rails"
   gem 'faker'
 end
+
+gem "jquery-rails"
+
+group :production do
+  gem 'mysql2'
+end
